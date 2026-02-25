@@ -1,0 +1,102 @@
+<!--右侧导航-->
+
+<ul class="aside hidden-xs hidden-sm">
+  <li>
+    <p> <img src="{eyou:global name='web_templets_pc' /}/skin/images/aside1.png" class="img1"> <img src="{eyou:global name='web_templets_pc' /}/skin/images/aaside1.png" class="img2"> </p>
+    <div class="phone_meassage">{eyou:global name='web_attr_1' /}</div>
+  </li>
+  <li>
+    <p> <img src="{eyou:global name='web_templets_pc' /}/skin/images/aside2.png" class="img1"> <img src="{eyou:global name='web_templets_pc' /}/skin/images/aaside2.png" class="img2"> </p>
+    <div class="kuzx">
+      <div class="kuzx_1">客服咨询</div>
+      <div class="kuzx_2_box">
+        <div class="kuzx_2"> <a href="http://wpa.qq.com/msgrd?v=3&amp;uin={eyou:global name='web_attr_2' /}&amp;site=qq&amp;menu=yes"> <i> <img src="{eyou:global name='web_templets_pc' /}/skin/images/head.png"> </i> <span>在线咨询</span> </a> </div>
+      </div>
+    </div>
+  </li>
+  <li> <a href="{eyou:type typeid='6'}{$field.typeurl}{/eyou:type}"> <img src="{eyou:global name='web_templets_pc' /}/skin/images/aside3.png" class="img1"> <img src="{eyou:global name='web_templets_pc' /}/skin/images/aaside3.png" class="img2"> </a> </li>
+  
+  <li> <img src="{eyou:global name='web_templets_pc' /}/skin/images/aside5.png" class="img1"> <img src="{eyou:global name='web_templets_pc' /}/skin/images/aaside5.png" class="img2">
+    <div class="ewm"> <img src="{eyou:global name='web_attr_3' /}" alt=""> </div>
+  </li>
+  
+  {eyou:searchform type='default'}
+    <form method="get" action="{$field.action}">
+  	{$field.hidden}
+    <li class="aside_search">
+      <p onclick="$('#searchForm').submit()"> <img src="{eyou:global name='web_templets_pc' /}/skin/images/aside6.png" class="img1"> <img src="{eyou:global name='web_templets_pc' /}/skin/images/aaside6.png" class="img2"> </p>
+      <div class="ss">
+        <div class="search_input_box">
+          <input type="text" name="keywords"  placeholder="请输搜索入关键字">
+        </div>
+      </div>
+    </li>
+  </form>
+  {/eyou:searchform} 
+  <li id="goTopBtn"> <img src="{eyou:global name='web_templets_pc' /}/skin/images/aside7.png" class="img1"> <img src="{eyou:global name='web_templets_pc' /}/skin/images/aaside7.png" class="img2"> </li>
+</ul>
+
+<div id="header">
+	<div class="fixed_top">
+		<div>
+			<!--logo-->
+			<div class="logo col-sm-4"> <a href="{eyou:global name='web_cmsurl' /}"><img src="{eyou:global name='web_logo' /}" alt="{eyou:global name='web_name' /}"> </a></div>
+			<!--pc导航-->
+			<ul class="menu hidden-sm hidden-xs col-sm-8">
+				<li class="current"> <a href="{eyou:global name='web_cmsurl' /}"> <span>首页</span> </a> </li>
+				{eyou:models type="top" row="60" id="field" currentstyle="current"}
+				<li class="{$field.currentstyle}"> <a href="{$field.typeurl}"><span>{$field.typename}</span></a>
+					{eyou:notempty name="$field.children"}
+					<div class="menu_2">
+						<ul>
+							{eyou:models name="$field.children" row="100" id="field2"}
+							<li> <a href="{$field2.typeurl}" class="sl">{$field2.typename}</a> </li>
+							{/eyou:models}
+						</ul>
+					</div>
+					{/eyou:notempty}
+				</li>
+				{/eyou:models}
+			</ul>
+			<!--手机导航ico-->
+			<div class="menu_icon hidden-md hidden-lg"> <img src="{eyou:global name='web_templets_pc' /}/skin/images/menuicon.png" />
+			</div>
+		</div>
+	</div>
+	<!--手机弹出导航-->
+	<ul class="wap_menu hidden-md hidden-lg">
+		<li class="menu_tit"><span>x</span> 快速导航</li>
+		<li class="menu_lists">
+			<div class="wap_menu1">
+				<p class="left"><a href="{eyou:global name='web_cmsurl' /}">首页</a></p>
+			</div>
+		</li>
+		{eyou:models type="top" row="60" id="field" currentstyle="current"}
+		<li class="menu_lists">
+			<div class="wap_menu1">
+				<p class="left"><a href="{$field.typeurl}">{$field.typename}</a></p>
+				{eyou:notempty name="$field.children"}
+				<p class="right"><a href="javascript:;">+</a></p>
+				{/eyou:notempty}
+			</div>
+			{eyou:notempty name="$field.children"}
+			<div class="wap_menu2">
+				{eyou:models name="$field.children" row="100" id="field2"}
+				<a href="{$field2.typeurl}"> <i></i> <span>{$field2.typename}</span> </a>
+				{/eyou:models}
+			</div>
+			{/eyou:notempty}
+		</li>
+		{/eyou:models}
+	</ul>
+	<!--手机弹出导航时，黑色屏罩-->
+	<div class="black_cloth hidden-lg hidden-md"></div>
+</div>
+<!--banner大图-->
+<div id="banner">
+	<div id="owl-demo" class="owl-carousel">
+		{eyou:adv pid='1'}
+		<a class="item" href="{$field.links}" {$field.target}><img src="{$field.litpic}" alt="{$field.title}"/></a>
+		{/eyou:adv}		
+	</div>
+</div>

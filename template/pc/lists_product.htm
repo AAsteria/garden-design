@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<title>{$eyou.field.seo_title}</title>
+<!--页面seo描述-->
+<meta name="description" content="{$eyou.field.seo_description}" />
+<!--页面seo关键词-->
+<meta name="keywords" content="{$eyou.field.seo_keywords}" />
+<!--网站地址栏图标-->
+<link href="{eyou:global name='web_cmspath' /}/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+{eyou:static file="skin/css/animate.css" /}
+{eyou:static file="skin/css/owl.carousel.css" /}
+{eyou:static file="skin/css/owl.theme.default.min.css" /}
+{eyou:static file="skin/css/bootstrap.css" /}
+{eyou:static file="skin/css/bootstrap-paginator.css" /}
+{eyou:static file="skin/css/global.css" /}
+{eyou:static file="skin/css/css.css" /}
+{eyou:static file="skin/css/index.css" /}
+{eyou:static file="skin/js/jquery-3.7.0.min.js" /}
+{eyou:static file="skin/js/owl.carousel.min.js" /}
+{eyou:static file="skin/js/bootstrap.js" /}
+{eyou:static file="skin/js/html5shiv.js" /}
+{eyou:static file="skin/js/respond.js" /}
+{eyou:static file="skin/js/global.js" /}
+{eyou:static file="skin/js/function.js" /}
+</head>
+<body>
+<!--公共头部开始--> 
+{eyou:include file="header.htm" /}
+<!--公共头部结束--> 
+<!--主体部分-->
+<div id="content"> 
+  <!--手机内页下拉菜单-->
+  <div class="phone_box hidden-lg hidden-md hidden-sm">
+    <div class="phone_crumb clearfix"> <img src="{eyou:global name='web_templets_pc' /}/skin/images/page_08.png"/> <span>{$eyou.field.typeid|gettoptype=###,'typename'} <em>{$eyou.field.typeid|gettoptype=###,'englist_name'}</em></span> <i class="phone-menuicon right"> <img src="{eyou:global name='web_templets_pc' /}/skin/images/2.png"/> </i> </div>
+    <div class="border"></div>
+    <ul class="phone-menulist sidemenu">
+  	  {eyou:models type='first'}
+      <li class="sub1"> <a class="sub1_a" href="{$field.typeurl}">{$field.typename}</a> </li>
+      {/eyou:models}
+    </ul>
+  </div>
+  <!--PC部分-->
+  <div class="container">
+    <div class="row">
+      <div class="inside col-sm-3 hidden-xs">
+        <h2 class="text-uppercase">{$eyou.field.typeid|gettoptype=###,'englist_name'}<br />
+          <span>{$eyou.field.typeid|gettoptype=###,'typename'}</span> </h2>
+        <ul class="sidemenu">
+      		  {eyou:models type='first' currentstyle='current'}
+      		  <li  class="{$field.currentstyle}"><a href="{$field.typeurl}">{$field.typename}</a></li>
+      		  {/eyou:models}
+        </ul>
+      </div>
+      <div class="col-sm-9 col-xs-12 main">
+        <div class="crumb hidden-xs">{$eyou.field.typename}<span>您所在的位置是：{eyou:position/}</div>
+        <div class="article">
+          <div class="list_image">
+            <ul class="clearfix row">
+              {eyou:list loop='6'}
+              <li class="col-md-4 col-xs-6">
+                <div class="box">
+                  <div class="img_area"> <a href="{$field.arcurl}"> <i></i> <img src="{$field.litpic}"> </a> </div>
+                  <div class="text_area"> <a href="{$field.arcurl}">{$field.title}</a> </div>
+                </div>
+              </li>
+              {/eyou:list}
+            </ul>
+          </div>
+          <div class="pagination_box">
+            <div class="pagination">
+              <ul class='pagination'>
+                {eyou:pagelist listitem='index,pre,pageno,next,end' listsize='2' /}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{eyou:include file="footer.htm" /}
+</body>
+</html>

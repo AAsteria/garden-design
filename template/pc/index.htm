@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta http-equiv="X-UA-Compatible" content="IE=9">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<!--首页seo标题-->
+		<title>{eyou:global name='web_title' /}</title>
+		<!--首页seo描述-->
+		<meta name="description" content="{eyou:global name='web_description' /}" />
+		<!--首页seo关键词-->
+		<meta name="keywords" content="{eyou:global name='web_keywords' /}" />
+		<!--网站地址栏图标-->
+		<link href="{eyou:global name='web_cmspath' /}/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+		{eyou:static file="skin/css/animate.css" /}
+		{eyou:static file="skin/css/owl.carousel.css" /}
+		{eyou:static file="skin/css/owl.theme.default.min.css" /}
+		{eyou:static file="skin/css/bootstrap.css" /}
+		{eyou:static file="skin/css/bootstrap-paginator.css" /}
+		{eyou:static file="skin/css/global.css" /}
+		{eyou:static file="skin/css/css.css" /}
+		{eyou:static file="skin/css/index.css" /}
+		{eyou:static file="skin/js/jquery-3.7.0.min.js" /}
+		{eyou:static file="skin/js/owl.carousel.min.js" /}
+		{eyou:static file="skin/js/bootstrap.js" /}
+		{eyou:static file="skin/js/html5shiv.js" /}
+		{eyou:static file="skin/js/respond.js" /}
+		{eyou:static file="skin/js/global.js" /}
+		{eyou:static file="skin/js/function.js" /}
+		
+	</head>
+	<body>
+		<!--公共头部开始-->
+		{eyou:include file="header.htm" /}
+		<!--公共头部结束-->
+		<!--主体部分-->
+		<div id="content">
+			{eyou:static file="skin/js/skrollr.min.js" /}
+			{eyou:modelsartlist typeid='1'}
+			<div class="in_page container"> 
+				<h2><span>{eyou:field name='typename'/}</span>
+					<p>{eyou:field name='englist_name' /}</p>
+				</h2>
+				<Div class="inner row">
+					<div class="col-xs-4 col-md-3 "><img src="{eyou:global name='web_templets_pc' /}/skin/images/about_img.jpg"></div>
+					<div class="col-xs-8 col-md-7 page_text">{eyou:type typeid='7' addtable='single_content'}{$field.content|html_msubstr=###,0,140}...{/eyou:type}</div>
+					<div class="col-sm-2 hidden-sm hidden-xs padding_0 bird" data-600-top="transform:translate3d(0,-30px,0px);"
+					 data--100-top="transform:translate3d(0,270px,0px);"><img src="{eyou:global name='web_templets_pc' /}/skin/images/bird.png"></div>
+				</Div>
+			</div>
+			{/eyou:modelsartlist}
+			{eyou:modelsartlist typeid='2'}
+			<div class="in_image">
+				<h2 class="container"><a href="{eyou:field name='typeurl' /}">查看更多</a>{eyou:field name='typename'/}</h2>
+				<div class="inner container">
+					<ul class="clearfix row">
+						{eyou:artlist loop='4' titlelen='50' orderby='pubdate'}
+						<li class="col-md-3 col-xs-6">
+							<div class="box">
+								<div class="img_area"> <a href="{$field.arcurl}"> <i></i> <img src="{$field.litpic}"> </a> </div>
+								<div class="text_area"> <a href="{$field.arcurl}">{$field.title}</a> </div>
+							</div>
+						</li>
+						{/eyou:artlist}
+					</ul>
+				</div>
+			</div>
+			{/eyou:modelsartlist}
+			{eyou:modelsartlist typeid='5'}
+			<div class="in_image1">
+				<div class="container">
+					<div class="row">
+						<div class="list_box col-md-7 clearfix">
+							<h2 class="clearfix"> <span>{eyou:field name='englist_name' /}</span> {eyou:field name='typename'/}
+								<p class=" hidden-xs">{eyou:field name='seo_description'/}</p>
+							</h2>
+							<ul class="clearfix">
+								{eyou:models type='son' loop='3'}
+								<li><a href="{$field.typeurl}">{$field.typename}</a></li>
+								{/eyou:models}
+							</ul>
+							<a href="{eyou:field name='typeurl' /}" class="more"> <img src="{eyou:global name='web_templets_pc' /}/skin/images/more.png" /> </a>
+						</div>
+						<div class="image_box col-md-5 row">
+							<ul>
+								{eyou:artlist loop='4' titlelen='50' orderby='pubdate'}
+								<li class="col-xs-6"><a href="{$field.arcurl}">
+										<p>{$field.title}</p>
+										<img src="{$field.litpic}">
+									</a></li>
+								{/eyou:artlist}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			{/eyou:modelsartlist}
+			{eyou:modelsartlist typeid='3'}
+			<div class="new">
+				<div class="container">
+					<div class="row clearfix">
+						<div class="col-md-6 list">
+							<div class="title clearfix">
+								<div class="left text">
+									<h4>{eyou:field name='englist_name' /}</h4>
+									<h5>{eyou:field name='typename'/}</h5>
+								</div>
+								<div class="titimg left"> <img src="{eyou:global name='web_templets_pc' /}/skin/images/news_img.jpg" /> </div>
+							</div>
+							<ul>
+								{eyou:artlist loop='5' titlelen='50' orderby='pubdate'}
+								
+								<li {eyou:eq name="$i" value="1"}class="on"{/eyou:eq}> <a
+								 href="{$field.arcurl}" class="clearfix">
+									<div class="time left"> <span>{$field.add_time|MyDate='d',###} </span>/{$field.add_time|MyDate='Y-m',###} </div>
+									<div class="left text">
+										<p>{$field.title}</p>
+										<p class="deta">{$field.seo_description|html_msubstr=###,0,100,true}</p>
+									</div>
+									</a>
+								</li>
+								{/eyou:artlist}
+							</ul>
+						</div>
+						<div class="col-md-6 con">
+							<div class="img"> <img src="{eyou:global name='web_templets_pc' /}/skin/images/new1.jpg" class="ad1" /> </div>
+							<ul class="clearfix">
+								{eyou:type typeid='2'}
+								<li> <a href="{$field.typeurl}"> <img src="{eyou:global name='web_templets_pc' /}/skin/images/newa1.png" />
+										<p> {$field.typename} </p>
+									</a> </li>
+								{/eyou:type}
+								{eyou:type typeid='3'}
+								<li> <a href="{$field.typeurl}"> <img src="{eyou:global name='web_templets_pc' /}/skin/images/newa2.png" />
+										<p> {$field.typename} </p>
+									</a> </li>
+								{/eyou:type}
+								{eyou:type typeid='4'}
+								<li> <a href="{$field.typeurl}"> <img src="{eyou:global name='web_templets_pc' /}/skin/images/newa3.png" />
+										<p> {$field.typename} </p>
+									</a> </li>
+								{/eyou:type}
+								{eyou:type typeid='6'}
+								<li> <a href="{$field.typeurl}"> <img src="{eyou:global name='web_templets_pc' /}/skin/images/newa4.png" />
+										<p> {$field.typename} </p>
+									</a> </li>
+								{/eyou:type}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			{/eyou:modelsartlist}
+		</div>
+		{eyou:include file="footer" /}
+		<script>
+			$(function() {
+				if ($(window).width() > 1000) {
+					var s = skrollr.init({
+						smoothScrolling: true,
+						smoothScrollingDuration: 500,
+						edgeStrategy: 'set',
+						forceHeight: false,
+						/*beforerender: function(data) {
+						 return data.curTop > data.lastTop;
+						 },*/
+						easing: {
+							WTF: Math.random,
+							inverted: function(p) {
+								return 1 - p;
+							}
+						}
+					});
+				}
+			})
+		</script>
+	</body>
+</html>

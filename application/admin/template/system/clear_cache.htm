@@ -1,0 +1,149 @@
+{include file="public/layout" /}
+<body class="bodystyle">
+<div id="toolTipLayer" style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<style type="text/css">
+    .nc-row li {
+        font-size: 14px;
+    }
+</style>
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title">
+            <a class="back_xin" href="javascript:history.back();" title="返回"><i class="iconfont e-fanhui"></i></a>
+            <div class="subject">
+                <h3>清除缓存</h3>
+                <h5></h5>
+            </div>
+        </div>
+    </div>
+    <!-- 操作说明 -->
+    <div id="" class="explanation">
+        <ul>
+            <li>使用场景：运营模式下及个别插件，如模板做了修改，需要清理缓存后生效；同时支持数据缓存清理</li>
+            <li>使用技巧：清除单一页面缓存，在URL后面加上 ?clear=1 访问即可（静态html不需操作）</li>
+            <li>定时清理：通过第三方采集、Excel等工具导入数据，要在宝塔里设置定时清理任务，前台才能及时显示</li>
+            <li style="text-indent: 5em;background:unset;">清理缓存api接口 {$Request.domain}__ROOT_DIR__/index.php?m=api&c=Ajax&a=clear_cache 仅支持服务器，可参考（<a href="JavaScript:void(0);" data-href="https://www.eyoucms.com/plus/view.php?aid=30612&origin_eycms=1" onclick="openFullframe(this,'在宝塔里定时清理网站缓存');">宝塔定时教程</a>）</li>
+        </ul>
+    </div>
+    <form class="form-horizontal" id="cleanCache" method="post">
+        <div class="ncap-form-default">
+            {if condition="!empty($pageDirList)"}
+            <dl class="row">
+                <dt class="tit">页面缓存文件</dt>
+                <dd class="opt">
+                    <ul class="nc-row ncap-waybill-list">
+                        {volist name="$pageDirList" id="vo"}
+                        <li>
+                            <label class="label">
+                                {if condition="$vo.dir_type == 'system'"}
+                                <input class="check single_check" type="checkbox" name="clearHtml[]" value="{$vo.dir_value}" checked="checked">
+                                {else /}
+                                <input class="check single_check" type="checkbox" name="clearHtml[]" value="{$vo.dir_type}/{$vo.dir_value}" checked="checked">
+                                {/if}
+                                {$vo.dir_title}<!-- ({$vo.dir_value}) -->
+                            </label>
+                        </li>
+                        {/volist}
+                    </ul>
+                </dd>
+            </dl>
+            {/if}
+            <dl class="row">
+                <dt class="tit">数据缓存文件</dt>
+                <dd class="opt">
+                    <ul class="nc-row ncap-waybill-list">
+                        {volist name="$cacheDirList" id="vo"}
+                        <li>
+                            <label class="label"><input class="check single_check" type="checkbox" name="clearCache[]" value="{$vo.dir_value}" checked="checked">{$vo.dir_title}<!-- ({$vo.dir_value}) --></label>
+                        </li>
+                        {/volist}
+                    </ul>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">数据表缓存</dt>
+                <dd class="opt">
+                    <ul class="nc-row ncap-waybill-list">
+                        <li>
+                            <label class="label"><input class="check single_check" type="checkbox" name="clearTable[]" value="table" checked="checked">数据表结构</label><p class="notic">数据保存不生效时执行</p>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl class="row none">
+                <dt class="tit"></dt>
+                <dd class="opt">
+                    <ul class="nc-row ncap-waybill-list">
+                        <li>
+                            <label class="label"><input type="checkbox" class="check" id="clearAll" name="clearAll" value="clearAll" checked="checked" onclick="$('input[name^=\'clear\']').prop('checked', this.checked);">全选</label>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+            <div class="bot">
+                <a href="JavaScript:void(0);" onclick="chk_submit();" class="ncap-btn-big ncap-btn-green" id="submitBtn">立即清理</a>&nbsp;
+                <a href="javascript:void(0);" onclick="allselect(this);" id="allselect" class="ncap-btn-big ncap-btn-green" style="border: 1px solid #C9C9C9; background-color: #fff;color: #555;" >取消</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+
+    $(function(){
+        $('.single_check').click(function(){
+            if ($('.single_check').length == $('.single_check:checked').length) {
+                $('#clearAll').prop('checked', true);
+                $('#allselect').html('取消');
+            } else {
+                $('#clearAll').prop('checked', false);
+                $('#allselect').html('全选');
+            }
+        });
+    });
+
+    function allselect(obj)
+    {
+        if (!$('#clearAll').prop("checked")) {
+            $('#clearAll').prop('checked', true);
+            $(obj).html('取消');
+        } else {
+            $('#clearAll').prop('checked', false);
+            $(obj).html('全选');
+        }
+        $('input[name^=\'clear\']').prop('checked', document.getElementById('clearAll').checked);
+    }
+
+    function chk_submit()
+    {
+        if ($('input[name^=clear]:checked').length <= 0) {
+            layer.msg('至少选择一项！', {icon: 2,time: 1000});
+            return false;
+        }
+        layer_loading('正在处理');
+        $.ajax({
+            type : 'post',
+            url : "{:url('System/clear_cache', ['_ajax'=>1])}",
+            data : $('#cleanCache').serialize(),
+            dataType : 'json',
+            success : function(res){
+                layer.closeAll();
+                if(res.code == 1){
+                    layer.msg(res.msg, {shade: layer_shade, time: 1000}, function(){
+                        top.window.location.reload();
+                    });
+                }else{
+                    showErrorMsg(res.msg);
+                }
+            },
+            error: function(e){
+                layer.closeAll();
+                showErrorAlert(e.responseText);
+            }
+        });
+    }
+</script>
+
+{include file="public/footer" /}

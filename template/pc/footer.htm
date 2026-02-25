@@ -1,0 +1,78 @@
+<div class="link">
+	<div class="container">
+		<div class="row clearfix">
+			<h4> 友情链接： </h4>
+			<ul class="clearfix">
+				{eyou:links type='text' loop='100' titlelen='20'} 
+				<li><a href="{$field.url}" {$field.target}>{$field.title}</a></li>
+				{/eyou:links}
+			</ul>
+		</div>
+	</div>
+</div>
+
+<!--公共底部开始-->
+<!--pc底部-->
+<div id="footer">
+	<div class="top hidden-lg hidden-md hidden-sm"> <img src="{eyou:global name='web_templets_pc' /}/skin/images/quik_ico7.png"> </div>
+	{eyou:global name='web_copyright' /} 备案号：{eyou:global name='web_recordnum' /}
+</div>
+<!--手机端底部-->
+<div class="pad hidden-lg hidden-md hidden-sm"></div>
+<!--手机底部导航-->
+<div class="wap_footer hidden-lg hidden-md hidden-sm">
+	<dl class="navigation">
+		<a>
+			<dt> <img src="{eyou:global name='web_templets_pc' /}/skin/images/quik_ico1.png"> </dt>
+			<dd>导航</dd>
+		</a>
+	</dl>
+	<dl>
+		<a href="tel:{eyou:global name='web_attr_1' /}">
+			<dt> <img src="{eyou:global name='web_templets_pc' /}/skin/images/quik_ico2.png"> </dt>
+			<dd>电话</dd>
+		</a>
+	</dl>
+	<dl>
+		<a href="http://wpa.qq.com/msgrd?v=3&uin={eyou:global name='web_attr_2' /}&site=qq&menu=yes" target="_blank">
+			<dt> <img src="{eyou:global name='web_templets_pc' /}/skin/images/quik_ico3.png" alt=""> </dt>
+			<dd>客服</dd>
+		</a>
+	</dl>
+	<dl>
+		<a href="{eyou:type typeid='6'}{$field.typeurl}{/eyou:type}">
+			<dt> <img src="{eyou:global name='web_templets_pc' /}/skin/images/quik_ico4.png"> </dt>
+			<dd>地图</dd>
+		</a>
+	</dl>
+	<dl>
+		<a class="w_searchButton">
+			<dt> <img src="{eyou:global name='web_templets_pc' /}/skin/images/quik_ico5.png"> </dt>
+			<dd>搜索</dd>
+		</a>
+	</dl>
+</div>
+
+<!--手机搜索框-->
+
+<div class="wap_search_input">
+	{eyou:searchform type='default'}
+	    <form method="get" action="{$field.action}">
+	  	{$field.hidden}
+		<input type="text" name="keywords" placeholder="请输入搜索关键字">
+		<p onclick="$('form').submit()">搜索</p>
+	</form>
+	  {/eyou:searchform} 
+</div>
+<!--公共底部结束-->
+<!-- 应用插件标签 start -->
+{eyou:weapp type='default' /}
+<!-- 应用插件标签 end -->
+
+
+<!--[if lt IE 9]>
+    <div class="notsupport">
+        <h1>:( 非常遗憾</h1>
+        <h2>您的浏览器版本太低，请升级您的浏览器</h2>
+    </div>
+    <![endif]-->

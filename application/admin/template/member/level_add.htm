@@ -1,0 +1,88 @@
+{include file="public/layout" /}
+
+<body class="bodystyle" style="overflow: auto;min-width:auto;">
+<div id="toolTipLayer"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page min-hg-c-i" style="min-width: auto;box-shadow:none;padding-bottom: 0px;">
+    <!-- 操作说明 -->
+    <div id="" class="explanation">
+        <ul>
+            <li>新增级别权重值不可低于10。</li>
+            <li>级别权重数字越大，级别权重越高，级别权重不可重复。</li>
+            <li>订单金额升级方式说明：订单已完成且已过可维权时间才会进行金额累积并自动升级指定会员</li>
+        </ul>
+    </div>
+    <form class="form-horizontal" id="postForm">
+        <div class="ncap-form-default">
+            <dl class="row">
+                <dt class="tit"> <label for="level_value"><em>*</em>级别权重</label> </dt>
+                <dd class="opt">
+                    <input type="text" name="level_value" id="level_value" class="input-txt" onkeyup="this.value=this.value.replace(/[^\d]/g,'');" autocomplete="off">
+                    <p class="notic">数字越大，级别权重越高，级别权重不可重复</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit"> <label for="level_name"><em>*</em>级别名称</label> </dt>
+                <dd class="opt">
+                    <input type="text" name="level_name" id="level_name" class="input-txt" autocomplete="off">
+                </dd>
+            </dl>
+            
+            <dl class="row">
+                <dt class="tit"><label for="upgrade_type"><em>*</em>升级条件</label></dt>
+                <dd class="opt">
+                    <label>
+                        <input type="radio" name="upgrade_type" value="1" onclick="upgradeType(this);"/>订单金额
+                    </label>
+                    &nbsp; &nbsp;
+                    <label>
+                        <input type="radio" name="upgrade_type" value="0" onclick="upgradeType(this);" checked="true"}/>不自动升级
+                    </label>
+                </dd>
+            </dl>
+
+            <dl class="row none upgrade_type_all" id="upgrade_type_1">
+                <dt class="tit"><label for="upgrade_order_money"><em>*</em>完成订单金额</label></dt>
+                <dd class="opt">
+                    满 <input type="text" name="upgrade_order_money" id="upgrade_order_money" class="input-txt" style="width: 80px !important;" onkeyup="this.value=this.value.replace(/^\D*([0-9]\d*\.?\d{0,2})?.*$/,'$1');" autocomplete="off"> 元，满足升级条件后可升级为此会员等级
+                </dd>
+            </dl>
+
+            <dl class="row">
+                <dt class="tit"><label for="discount_type"><em>*</em>折扣权益</label></dt>
+                <dd class="opt">
+                    <label>
+                        <input type="radio" name="discount_type" value="0" onclick="discountType(this);" checked="true"/>不设置折扣
+                    </label>
+                    &nbsp; &nbsp;
+                    <label>
+                        <input type="radio" name="discount_type" value="1" onclick="discountType(this);"/>自定义
+                    </label>
+                </dd>
+            </dl>
+
+            <dl class="row none" id="discount_type" {eq name="$usersLevel.discount_type" value="1"} style="display: block;" {/eq}>
+                <dt class="tit"><label for="discount"><em>*</em>当前等级可享受</label></dt>
+                <dd class="opt">
+                    <input type="text" name="discount" id="discount" class="input-txt" placeholder="请输入0.1-9.9之间的数字" style="width: 180px !important;" onkeyup="this.value=this.value.replace(/^\D*([0-9]\d*\.?\d{0,1})?.*$/,'$1'); handleDiscountValue(this, true);" onchange="handleDiscountValue(this, false);" autocomplete="off" maxlength="3"> 折
+                </dd>
+            </dl>
+
+            <dl class="row">
+                <dt class="tit"><label for="status"><em>*</em>状态</label></dt>
+                <dd class="opt">
+                    <label><input type="radio" name="status" value="1" checked="true"/>启用</label>
+                    &nbsp; &nbsp;
+                    <label><input type="radio" name="status" value="0"/>禁用</label>
+                </dd>
+            </dl>
+
+            <div class="bot">
+                <a href="JavaScript:void(0);" onclick="saveUsersLevel(this);" data-url="{:url('Member/level_add', ['_ajax' => 1])}" class="ncap-btn-big ncap-btn-green">确认提交</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__SKIN__/js/users_level.js?v={$version}"></script>
+{include file="public/footer" /}

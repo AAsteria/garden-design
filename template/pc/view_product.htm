@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<title>{$eyou.field.seo_title}</title>
+<!--页面seo描述-->
+<meta name="description" content="{$eyou.field.seo_description}" />
+<!--页面seo关键词-->
+<meta name="keywords" content="{$eyou.field.seo_keywords}" />
+<!--网站地址栏图标-->
+<link href="{eyou:global name='web_cmspath' /}/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+{eyou:static file="skin/css/animate.css" /}
+{eyou:static file="skin/css/owl.carousel.css" /}
+{eyou:static file="skin/css/owl.theme.default.min.css" /}
+{eyou:static file="skin/css/bootstrap.css" /}
+{eyou:static file="skin/css/bootstrap-paginator.css" /}
+{eyou:static file="skin/css/global.css" /}
+{eyou:static file="skin/css/css.css" /}
+{eyou:static file="skin/css/index.css" /}
+{eyou:static file="skin/js/jquery-3.7.0.min.js" /}
+{eyou:static file="skin/js/owl.carousel.min.js" /}
+{eyou:static file="skin/js/bootstrap.js" /}
+{eyou:static file="skin/js/html5shiv.js" /}
+{eyou:static file="skin/js/respond.js" /}
+{eyou:static file="skin/js/global.js" /}
+{eyou:static file="skin/js/function.js" /}
+</head>
+<body>
+<!--公共头部开始-->
+{eyou:include file="header.htm" /}
+<!--公共头部结束-->
+{eyou:static file="skin/css/ekko-lightbox.css" /}
+{eyou:static file="skin/js/ekko-lightbox.js" /}
+{eyou:static file="skin/js/pinchzoom.js" /}
+<div id="content">
+	<!--手机内页下拉菜单-->
+	<div class="phone_box hidden-lg hidden-md hidden-sm">
+		<div class="phone_crumb clearfix"> <img src="{eyou:global name='web_templets_pc' /}/skin/images/page_08.png" />
+			<span>{$eyou.field.typeid|gettoptype=###,'typename'} <em>{$eyou.field.typeid|gettoptype=###,'englist_name'}</em></span>
+			<i class="phone-menuicon right"> <img src="{eyou:global name='web_templets_pc' /}/skin/images/2.png" /> </i> </div>
+		<div class="border"></div>
+		<ul class="phone-menulist sidemenu">
+			{eyou:models type='first'}
+			<li class="sub1"> <a class="sub1_a" href="{$field.typeurl}">{$field.typename}</a> </li>
+			{/eyou:models}
+		</ul>
+	</div>
+	<!--PC部分-->
+	<div class="container">
+		<div class="row">
+			<div class="inside col-sm-3 hidden-xs">
+			  <h2 class="text-uppercase">{$eyou.field.typeid|gettoptype=###,'englist_name'}<br />
+			    <span>{$eyou.field.typeid|gettoptype=###,'typename'}</span> </h2>
+			  <ul class="sidemenu">
+					  {eyou:models type='first' currentstyle='current'}
+					  <li  class="{$field.currentstyle}"><a href="{$field.typeurl}">{$field.typename}</a></li>
+					  {/eyou:models}
+			  </ul>
+			</div>
+			<div class="col-sm-9 col-xs-12 main">
+				<div class="crumb hidden-xs">{$eyou.field.typename}<span>您所在的位置是：{eyou:position/}</div>
+				<div class="article">
+					<div class="product_detail detail">
+						<div class="title">
+							<h3>{$eyou.field.title}</h3>
+							<a href="javascript:history.go(-1)" class="return_list">[返回]</a>
+						</div>
+						<div class="product_detail_images">
+							<div class="product_detail_img">
+								{eyou:volist name="$eyou.field.image_list"}
+								<div class="product_detail_pic"> <a href="{$field.image_url}" data-toggle="lightbox" data-gallery="example-gallery"
+									 data-footer=""><img src="{$field.image_url}" alt="{$field.intro}" /></a></div>
+								{/eyou:volist}
+							</div>
+						</div>
+						<div class="product_detail_content">
+							<div class="product_detail_content1">详细信息</div>
+							<div class="product_detail_content2"> {$eyou.field.content} </div>
+							<div class="pageTurning">
+								<div class="prevs">
+									<div class='prev'>
+										{eyou:prenext get='pre'}
+										<a href="{$field.arcurl}" title="{$field.title}"> 上一篇 : {$field.title} </a>
+										{eyou:else /}
+										<a>上一篇：没有了</a>
+										{/eyou:prenext}
+									</div>
+								</div>
+								<div class="nexts">
+									<div class='next'>
+										{eyou:prenext get='next'}
+										<a href="{$field.arcurl}" title="{$field.title}"> 下一篇 : {$field.title} </a>
+										{eyou:else /}
+										<a>下一篇：没有了</a>
+										{/eyou:prenext}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{eyou:include file="footer.htm" /}
+</body>
+</html>

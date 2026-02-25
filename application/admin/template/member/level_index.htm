@@ -1,0 +1,91 @@
+
+{include file="public/layout" /}
+<body class="bodystyle" style="cursor: default; -moz-user-select: inherit; height: calc( 100% - 40px );">
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+{include file="member/left" /}
+<div class="page min-hg-c-20" style="min-width:auto;margin-left:100px;">
+    <div class="fixed-bar">
+        <div class="item-title">
+            <ul class="tab-base nc-row">
+                {eq name="'Member@level_index'|is_check_access" value="1"}
+                <li>
+                    <a {if condition="in_array($Request.action, ['level_index','level_add','level_edit'])"}class="current"{/if} href='{:url("Member/level_index")}'>
+                        <span>会员级别</span>
+                    </a>
+                </li>
+                {/eq}
+                {eq name="'Level@index'|is_check_access" value="1"}
+                <li>
+                    <a {if condition="in_array($Request.action, ['index'])"}class="current"{/if} href='{:U('Level/index')}'>
+                        <span>升级套餐管理</span>
+                    </a>
+                </li>
+                {/eq}
+            </ul>
+        </div>
+    </div>
+    <div class="flexigrid">
+        <!-- 操作说明 -->
+        <div id="explanation" class="explanation">
+            <ul>
+                <li>级别权重越高权根越高</li>
+                <li>会员级别自动升级后，该级别对应会员期限默认是永久期限</li>
+            </ul>
+        </div>
+        {eq name="$Think.const.CONTROLLER_NAME.'@level_add'|is_check_access" value="1"}
+        <div class="mDiv mt10">
+            <div class="ftitle">
+                <div class="fbutton">
+                    <a href="javascript:void(0);" data-href="{:url('Member/level_add')}" onclick="openFullframe(this, '新增级别', '50%', '65%');">
+                        <div class="add" title="新增级别">
+                            <span><i class="layui-icon layui-icon-addition"></i>新增级别</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {/eq}
+        <div class="hDiv">
+            <div class="hDivBox">
+                <table cellspacing="0" cellpadding="0" style="width: 100%">
+                    <thead>
+                    <tr>
+                        <th abbr="article_time" axis="col4" class="w80">
+                            <div class="tc">级别权重</div>
+                        </th>
+                        <th abbr="ac_id" axis="col4">
+                            <div class="text-l10">级别名称</div>
+                        </th>
+                        <th abbr="article_time" axis="col4" class="w500">
+                            <div class="text-l10">升级条件</div>
+                        </th>
+                        {eq name='$isShowDownCount' value='1'}
+                        <th abbr="article_time" axis="col4" class="w100">
+                            <div class="tc">下载次数(天)</div>
+                        </th>
+                        {/eq}
+                        <th abbr="article_time" axis="col4" class="w160">
+                            <div class="tc">折扣权益</div>
+                        </th>
+                        <th abbr="article_time" axis="col4" class="w120">
+                            <div class="tc">会员数量</div>
+                        </th>
+                        <th abbr="article_time" axis="col4" class="w120">
+                            <div class="tc">状态</div>
+                        </th>
+                        <th axis="col1" class="w200">
+                            <div class="text-l10">操作</div>
+                        </th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <!-- 等级列表页面 -->
+        <div id="levelListPage">{include file="member/level_list" /}</div>
+        <!-- 等级列表页面 -->
+    </div>
+</div>
+<script type="text/javascript" src="__SKIN__/js/users_level.js?v={$version}"></script>
+{include file="public/footer" /}
