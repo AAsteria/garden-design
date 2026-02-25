@@ -1,4 +1,5 @@
 # static_site 静态站点说明
+Site is live at [https://aasteria.github.io/garden-design/](https://aasteria.github.io/garden-design/)
 
 ## 素材映射表（assets/img → 页面/模块）
 
