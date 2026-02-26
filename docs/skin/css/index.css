@@ -148,6 +148,15 @@
 	height: 180px !important;
 	object-fit: cover !important;
 }
+#content .new .list ul li .text .news-preview-images {
+	display: grid;
+	grid-template-columns: repeat(5, minmax(0, 1fr));
+	gap: 8px;
+}
+#content .new .list ul li .text .news-preview-images img {
+	flex: none;
+	height: 120px !important;
+}
 #content .new .list ul li .text .deta {
 	display: none;
 }
