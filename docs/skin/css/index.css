@@ -129,6 +129,10 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+	margin: 0;
+}
+#content .new .list ul li .text .preview-images {
+	margin-top: 1em;
 }
 #content .new .list ul li .text .deta {
 	display: none;
