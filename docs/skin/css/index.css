@@ -133,6 +133,20 @@
 }
 #content .new .list ul li .text .preview-images {
 	margin-top: 1em;
+	display: flex;
+	gap: 8px;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	overflow: visible;
+	white-space: normal;
+}
+#content .new .list ul li .text .preview-images img {
+	display: block;
+	flex: 1 1 180px;
+	width: 100%;
+	max-width: none !important;
+	height: 180px !important;
+	object-fit: cover !important;
 }
 #content .new .list ul li .text .deta {
 	display: none;
